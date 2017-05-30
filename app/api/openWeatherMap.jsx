@@ -7,15 +7,17 @@ module.exports = {
         var encodedLocation = encodeURIComponent(location);
         var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
         
-        return axios.get(requestUrl).then(function(res) {
-            
+        return axios.get(requestUrl).then(function(res) {                
                 if (res.data.cod && res.data.message) {
-                    throw new Error(res.data.message);
+                    throw new Error("404 city not found");
                 }else {                   
                     return res.data.main.temp;
                 }
-            }, function(res) {
-                throw new Error(res.data.message);
+            }, function(res) {               
+                throw new Error("404 city not found");
             });
     }
 }
+
+
+
